@@ -1,5 +1,7 @@
 package logic;
 
+import java.util.Calendar;
+
 public class Test03 {
 
 	public static void main(String[] args) {
@@ -18,6 +20,17 @@ public class Test03 {
 		result = n <= adult;
 		System.out.println(n);
 		System.out.println(result);
+
+		
+		int birth = 19990217;
+		int year = birth / 10000;
+		int y = Calendar.getInstance().get(Calendar.YEAR);
+		int age = y - year + 1;
+		
+		boolean ad = age >= 20;
+		
+		System.out.println(age);
+		System.out.println(ad);
 		
 	}
 
