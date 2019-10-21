@@ -1,4 +1,5 @@
 package output;
+import java.lang.*;
 
 public class Test04 {
 
