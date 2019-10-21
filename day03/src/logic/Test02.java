@@ -3,6 +3,7 @@ package logic;
 public class Test02 {
 
 	public static void main(String[] args) {
+
 //		문제
 //		다음을 계산하는 프로그램을 만드세요
 //		자장면 한그릇에 5000원, 짬뽕 한그릇에 6000원인 중국집이 있습니다.
@@ -20,6 +21,7 @@ public class Test02 {
 		int total = jaTotal + jjamTotal;
 		
 		boolean result = total >= event;
+
 		
 		System.out.println(total);
 		System.out.println(result);
