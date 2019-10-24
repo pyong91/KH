@@ -35,6 +35,7 @@ public class Test07 {
 		babyPrice = 0;
 		
 //		입력
+		System.out.println("생년월일 8자리를 입력하세요");
 		birth = sc.nextInt();
 		sc.close();
 		
@@ -60,14 +61,19 @@ public class Test07 {
 		System.out.println("기본 요금 : " + total);
 		
 //		행사 할인
+		
 		dice = r.nextInt(6) + 1;
-		if(dice == 5) {
+		if(total > 0 && dice == 5) {
 			total = total * 90 / 100;
+			System.out.println("주사위 : " + dice);
 		}
+		
+//		price *= 90;
+//		price = price / 10 * 10; 버림
+//		price = (price +5) / 10 * 10; 반올림
 		
 		
 //		출력
-		System.out.println("주사위 : " + dice);
 		System.out.println("최종 요금 : " + total);
 		
 	}
