@@ -18,6 +18,8 @@ public class Test10 {
 			sum +=n;
 			System.out.println("합계 : " + sum);
 		}
+		
+		sc.close();
 		avg = sum / 5.0;
 		System.out.println("평균 : " + avg);
 		
