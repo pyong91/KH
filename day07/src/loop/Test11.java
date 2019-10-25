@@ -23,10 +23,9 @@ public class Test11 {
 				count++;
 			}
 		}
-		
+		sc.close();
 		System.out.println("정답 수 : " + count);
 		
 	}
-	
 }
 
