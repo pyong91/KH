@@ -21,7 +21,7 @@ public class Test14 {
 			System.out.print(str[i] + " ");
 		}
 		System.out.println();
-		
+
 		
 		for (int i = 0; i < str.length; i++) {
 			randomIndex = r.nextInt(str.length);
