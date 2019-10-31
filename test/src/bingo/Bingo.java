@@ -7,7 +7,6 @@ public class Bingo {
 	private String name;
 	private int size;
 	private int[][] bingo;
-	private int bingoCount = 0;
 
 	public Bingo(String name, int size) {
 		this.name = name;
@@ -59,13 +58,29 @@ public class Bingo {
 	}
 	
 //	미완성
-	public void checkBingo() {
+	public int checkBingo() {
+		
+//		가로빙고 체크
+		int count = 0;
+		int bingoCount = 0;
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
 				if(bingo[i][j] != 0) break;
+				count++;
 			}
+			if(count == 5) bingoCount++;
 		}
 		
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				if(bingo[i][j] != 0) break;
+				count++;
+			}
+			if(count == 5) bingoCount++;
+		}
+		
+		
+		return bingoCount;
 	}
 	
 	
