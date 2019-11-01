@@ -56,40 +56,38 @@ public class Bingo {
 			}
 		}
 	}
-	
+
 //	미완성
 	public int checkBingo() {
-		
+
 //		가로빙고 체크
 		int count = 0;
 		int bingoCount = 0;
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
-				if(bingo[i][j] != 0) break;
-				count++;
+				if (bingo[i][j] != 0) {
+					count++;
+					break;
+				}
 			}
-			if(count == 5) bingoCount++;
+			if (count == size) {
+				bingoCount++;
+			}
 		}
-		
+//		
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
-				if(bingo[i][j] != 0) break;
-				count++;
+				if (bingo[j][i] != 0) {
+					count++;
+					break;
+				}
 			}
-			if(count == 5) bingoCount++;
+			if (count == size) {
+				bingoCount++;
+			}
 		}
-		
-		
+
 		return bingoCount;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
