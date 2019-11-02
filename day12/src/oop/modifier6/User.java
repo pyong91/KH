@@ -18,7 +18,7 @@ public class User {
 		this.calc();
 	}
 	
-	public void calc() {
+	private void calc() {
 		this.setTotal(this.kor + this.eng + this.math);
 		this.setAvg(this.total / 3);
 		this.setPass(this.avg >= 60 ? true : false);
