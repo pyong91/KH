@@ -11,14 +11,29 @@ public class User {
 	private boolean isPass;
 
 	User(String name, int kor, int eng, int math) {
-		this.setName(name);
-		this.setKor(kor);
-		this.setEng(eng);
-		this.setMath(math);
-		this.setTotal(kor + eng + math);
-		this.setAvg(this.getTotal() / 3);
-		this.setPass(this.getAvg() >= 60 ? true : false);
+		this.name = name;
+		this.kor = kor;
+		this.eng = eng;
+		this.math = math;
+		this.calc();
 	}
+	
+	public void calc() {
+		this.setTotal(this.kor + this.eng + this.math);
+		this.setAvg(this.total / 3);
+		this.setPass(this.avg >= 60 ? true : false);
+	}
+	
+//	User(String name, int kor, int eng, int math) {
+//		this.name = name;
+//		this.kor = kor;
+//		this.eng = eng;
+//		this.math = math;
+//		this.setTotal(this.kor + this.eng + this.math);
+//		this.setAvg(this.total / 3);
+//		this.setPass(this.avg >= 60 ? true : false);
+//	}
+	
 
 	public void print() {
 		System.out.println("이름  : " + this.getName());

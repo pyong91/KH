@@ -11,6 +11,8 @@ public class Apartment {
 		return pyung;
 	}
 
+	
+	
 	public void setPyung(int pyung) {
 		switch (pyung) {
 		case 25:
