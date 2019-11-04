@@ -10,7 +10,7 @@ public class User {
 	private double avg;
 	private boolean isPass;
 
-	User(String name, int kor, int eng, int math) {
+	public User(String name, int kor, int eng, int math) {
 		this.name = name;
 		this.kor = kor;
 		this.eng = eng;
@@ -21,7 +21,7 @@ public class User {
 	private void calc() {
 		this.setTotal(this.kor + this.eng + this.math);
 		this.setAvg(this.total / 3);
-		this.setPass((this.avg >= 60) ? true : false);
+		this.setPass(this.avg >= 60);
 	}
 	
 //	User(String name, int kor, int eng, int math) {
@@ -31,23 +31,29 @@ public class User {
 //		this.math = math;
 //		this.setTotal(this.kor + this.eng + this.math);
 //		this.setAvg(this.total / 3);
-//		this.setPass(this.avg >= 60 ? true : false);
+//		this.setPass(this.avg >= 60);
 //	}
 	
 
 	public void print() {
-		System.out.println("이름  : " + this.getName());
-		System.out.println("국어  : " + this.getKor());
-		System.out.println("영어  : " + this.getEng());
-		System.out.println("수학  : " + this.getMath());
-		System.out.println("총점  : " + this.getTotal());
-		System.out.println("평균  : " + this.getAvg());
+		System.out.println("이름  : " + this.name);
+		System.out.println("국어  : " + this.kor);
+		System.out.println("영어  : " + this.eng);
+		System.out.println("수학  : " + this.math);
+		System.out.println("총점  : " + this.total);
+		System.out.println("평균  : " + this.avg);
 		if (isPass)
 			System.out.println("결과 : 합격");
 		else
 			System.out.println("결과 : 불합격");
 	}
 
+	
+	
+	
+	
+	
+	
 	public String getName() {
 		return name;
 	}
@@ -84,7 +90,7 @@ public class User {
 		return total;
 	}
 
-	public void setTotal(int total) {
+	private void setTotal(int total) {
 		this.total = total;
 	}
 
@@ -92,7 +98,7 @@ public class User {
 		return avg;
 	}
 
-	public void setAvg(double avg) {
+	private void setAvg(double avg) {
 		this.avg = avg;
 	}
 
@@ -100,7 +106,7 @@ public class User {
 		return isPass;
 	}
 
-	public void setPass(boolean isPass) {
+	private void setPass(boolean isPass) {
 		this.isPass = isPass;
 	}
 
