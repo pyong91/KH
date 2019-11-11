@@ -11,6 +11,7 @@ public class Test01 {
 		
 		File target = new File("files", "single.txt");
 		
+//		
 		if(!target.exists()) {
 			target.createNewFile();
 		}
@@ -24,6 +25,10 @@ public class Test01 {
 		out.write(30000); // 30000은 48로 저장됨(byte에 맞게 변환)
 		out.write(9); //\t
 		out.write('!');
+		out.write('!');
+		out.write('!');
+		out.write('!');
+		
 		
 //		통로 종료 반드시!
 		out.close();
