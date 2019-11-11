@@ -2,7 +2,7 @@ package api.io.file;
 
 import java.io.File;
 
-public class Tset01 {
+public class Test01 {
 
 	public static void main(String[] args) {
 //		파일 : 글자의 모음
