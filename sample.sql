@@ -1,15 +1,15 @@
--- student_score Å×ÀÌºí Á¶È¸
+-- student_score í…Œì´ë¸” ì¡°íšŒ
 select * from student_score;
 
--- ÀÇ¹Ì¾ø´Â µ¥ÀÌÅÍ Ãß°¡
+-- ì˜ë¯¸ì—†ëŠ” ë°ì´í„° ì¶”ê°€
 insert into snack values(null,null,null,null);
-insert into snack values(5, 'Çã´Ï¹öÅÍÄ¨', 1500, 30);
+insert into snack values(5, 'í—ˆë‹ˆë²„í„°ì¹©', 1500, 30);
 select * from snack;
 
--- no´Â ÇÊ¼öÇ×¸ñÀÌ¸ç Áßº¹ÀÌ ºÒ°¡´É
--- nameÀº ÇÊ¼öÇ×¸ñÀÌ¸ç Áßº¹Àº °¡´É
--- price´Â ÇÊ¼öÇ×¸ñÀÌ¸ç Áßº¹Àº °¡´É
--- stockÀº ÇÊ¼öÇ×¸ñÀÌ¸ç Áßº¹Àº °¡´É
+-- noëŠ” í•„ìˆ˜í•­ëª©ì´ë©° ì¤‘ë³µì´ ë¶ˆê°€ëŠ¥
+-- nameì€ í•„ìˆ˜í•­ëª©ì´ë©° ì¤‘ë³µì€ ê°€ëŠ¥
+-- priceëŠ” í•„ìˆ˜í•­ëª©ì´ë©° ì¤‘ë³µì€ ê°€ëŠ¥
+-- stockì€ í•„ìˆ˜í•­ëª©ì´ë©° ì¤‘ë³µì€ ê°€ëŠ¥
 drop table snack;
 create table snack(
 no number not null unique,
@@ -19,21 +19,21 @@ stock number not null
 );
 
 insert into snack values(null,null,null,null);
-insert into snack values(5, 'Çã´Ï¹öÅÍÄ¨', 1500, 30);
+insert into snack values(5, 'í—ˆë‹ˆë²„í„°ì¹©', 1500, 30);
 select * from snack;
 
 create table menu_coffee(
 name VARCHAR2(20) not null unique,
-type VARCHAR2(20) not null, -- check(type in ('Ä¿ÇÇ', 'ÇÁ¶óÇªÄ¡³ë', '½º¹«µğ')), 
+type VARCHAR2(20) not null, -- check(type in ('ì»¤í”¼', 'í”„ë¼í‘¸ì¹˜ë…¸', 'ìŠ¤ë¬´ë””')), 
 tall number not null, -- check(tall >= 0)
 grande number not null, -- check(grande >= 0)
 venti number not null -- check(venti >= 0)
 );
 
-insert into menu_coffee values('ÀÚ¹ÙÄ¨', 'ÇÁ¶óÇªÄ¡³ë', 6100, 6600, 7100);
-insert into menu_coffee values('Ä«¶ó¸á', 'ÇÁ¶óÇªÄ¡³ë', 5600, 6100, 6600);
-insert into menu_coffee values('Äİµåºê·ç', 'Ä¿ÇÇ', 4500, 5000, 5500);
-insert into menu_coffee values('¾Æ¸Ş¸®Ä«³ë', 'Ä¿ÇÇ', 4100, 4600, 5100);
+insert into menu_coffee values('ìë°”ì¹©', 'í”„ë¼í‘¸ì¹˜ë…¸', 6100, 6600, 7100);
+insert into menu_coffee values('ì¹´ë¼ë©œ', 'í”„ë¼í‘¸ì¹˜ë…¸', 5600, 6100, 6600);
+insert into menu_coffee values('ì½œë“œë¸Œë£¨', 'ì»¤í”¼', 4500, 5000, 5500);
+insert into menu_coffee values('ì•„ë©”ë¦¬ì¹´ë…¸', 'ì»¤í”¼', 4100, 4600, 5100);
 
 select * from menu_coffee;
 
@@ -41,22 +41,22 @@ drop table subject_price;
 
 create table subject_price(
 subject varchar2(20) not null,
-field varchar2(20) not null check(field in('°³¹ß', 'º¸¾È')),
+field varchar2(20) not null check(field in('ê°œë°œ', 'ë³´ì•ˆ')),
 price number not null check(price >= 0),
 begin date,
 finish date
 );
 
--- ¿î ÁÁ¾Æ¼­ µÈ°Í... ÇÑ±¹½Ä ³¯Â¥ Çü½ÄÀÌ¶ó Ãß°¡µÈ °Í; to_date('2019-11-20', 'YYYY-MM-DD')
+-- ìš´ ì¢‹ì•„ì„œ ëœê²ƒ... í•œêµ­ì‹ ë‚ ì§œ í˜•ì‹ì´ë¼ ì¶”ê°€ëœ ê²ƒ; to_date('2019-11-20', 'YYYY-MM-DD')
 --                                                   to_date('20191120', 'YYYYMMDD')
-insert into subject_price values('ÀÚ¹Ù', '°³¹ß', 500000, '2019-11-20', '2019-12-20');
-insert into subject_price values('JSP', '°³¹ß', 600000, '2019-12-21', '2020-01-15');
-insert into subject_price values('¸®¹ö½Ì', 'º¸¾È', 800000, '2019-11-15', '2019-12-10');
-insert into subject_price values('¾Ç¼ºÄÚµåºĞ¼®', 'º¸¾È', 950000, '2020-01-05', '2020-02-01');
+insert into subject_price values('ìë°”', 'ê°œë°œ', 500000, '2019-11-20', '2019-12-20');
+insert into subject_price values('JSP', 'ê°œë°œ', 600000, '2019-12-21', '2020-01-15');
+insert into subject_price values('ë¦¬ë²„ì‹±', 'ë³´ì•ˆ', 800000, '2019-11-15', '2019-12-10');
+insert into subject_price values('ì•…ì„±ì½”ë“œë¶„ì„', 'ë³´ì•ˆ', 950000, '2020-01-05', '2020-02-01');
 
 select * from subject_price;
 
--- not null unique == primary key(ÇÏ³ª¸¸ °¡´É)
+-- not null unique == primary key(í•˜ë‚˜ë§Œ ê°€ëŠ¥)
 
 commit;
 
@@ -70,3 +70,4 @@ phone varchar2(200)
 );
 
 commit;
+                                  
