@@ -15,6 +15,7 @@ public class Test01 {
 //		byte 배열을 문자열로 변환
 		String c = new String(by);
 		System.out.println(c);
+		
 	}
 
 }
