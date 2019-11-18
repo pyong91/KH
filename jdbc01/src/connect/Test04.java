@@ -16,7 +16,10 @@ public class Test04 {
 		System.out.println("수량을 입력해라");
 		int qtt = sc.nextInt();
 		
+//		OracleDriver 파일을 불러오는 코드
 		Class.forName("oracle.jdbc.OracleDriver");
+		
+//		연결하는 코드
 		Connection con = DriverManager.getConnection(
 				"jdbc:oracle:thin:@localhost:1521/xe", "sample", "sample");
 		
@@ -27,6 +30,7 @@ public class Test04 {
 
 		PreparedStatement ps = con.prepareStatement(sql);
 		
+//		실행 명령
 		ps.execute();
 		
 		con.close();
