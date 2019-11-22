@@ -8,6 +8,12 @@ public class KHMemberDto {
 	private int point;
 	private String joinDate;
 
+	@Override
+	public String toString() {
+		return "KHMemberDto [number=" + number + ", name=" + name + ", id=" + id + ", pw=" + pw + ", point=" + point
+				+ ", joinDate=" + joinDate + "]";
+	}
+
 	public KHMemberDto() {
 		super();
 	}

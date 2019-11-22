@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>로그인예제</title>
+<link href="style.css" rel="stylesheet">
+</head>
+<body>
+	<form action="/db/kh_login" method="post">
+		<input type="text" name="id" placeholder="아이디" required>
+		<input type="password" name="pw" placeholder="비밀번호" required>
+		<input type="submit" value="로그인">
+		<input type="reset" value="지우기">
+	</form>	
+</body>
+</html>
+<!-- 
+GET
+- 주소를 통한 요청정보를 전달
+- 간편함
+- 보낼 수 있는 양이 한정적(주소는 256자까지만 작성 가능)
+
+POST
+- request body를 이용하여 정보를 전달
+- 준비물이 많이 필요(form, input, ...)
+- 보낼 수 있는 양이 무제한
+- 글꼴이 깨짐(수신측에서 복구 필요)
+ -->

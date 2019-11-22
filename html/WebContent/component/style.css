@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+input{
+    line-height: 36px;
+    padding-top: 0px;
+    padding-right: 12px;
+    padding-bottom: 0px;
+    padding-left: 12px;
+    border-radius: 4px;
+    transition: all .1s;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid #e9f2f9;
+    width: 100px;
+    font-size: 14px;
+    font-family: rubik;
+    outline: none;
+}
+
+input[type=submit]{
+	line-height: 36px;
+    padding-top: 0px;
+    padding-right: 12px;
+    padding-bottom: 0px;
+    padding-left: 12px;
+    border-radius: 4px;
+    transition: all .1s;
+    box-sizing: border-box;
+    background-color: #e3f6f5;
+    border: 1px solid #e9f2f9;
+    width: 100px;
+    font-size: 14px;
+    font-family: rubik;
+    outline: none;
+}

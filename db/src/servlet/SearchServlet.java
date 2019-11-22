@@ -24,7 +24,7 @@ public class SearchServlet extends HttpServlet {
 			resp.setCharacterEncoding("UTF-8");
 			resp.setContentType("text/plain; charset=UTF-8");
 			for(SnackDto dto : list) {
-				resp.getWriter().println(dto.toString());
+				resp.getWriter().println(dto);
 			}
 			
 		} catch (Exception e) {
