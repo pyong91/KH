@@ -53,7 +53,7 @@ public class SnackDao {
 	public List<SnackDto> getList() throws Exception {
 		Connection con = this.getConnection();
 
-		String sql = "select * from snack order by no ask";
+		String sql = "select * from snack order by no asc";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		

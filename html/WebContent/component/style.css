@@ -4,7 +4,7 @@ input{
     line-height: 36px;
     padding-top: 0px;
     padding-right: 12px;
-    padding-bottom: 0px;
+    padding-bottom: 10px;
     padding-left: 12px;
     border-radius: 4px;
     transition: all .1s;
@@ -16,12 +16,11 @@ input{
     font-family: rubik;
     outline: none;
 }
-
 input[type=submit]{
 	line-height: 36px;
     padding-top: 0px;
     padding-right: 12px;
-    padding-bottom: 0px;
+    padding-bottom: 10px;
     padding-left: 12px;
     border-radius: 4px;
     transition: all .1s;
