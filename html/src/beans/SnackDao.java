@@ -56,7 +56,7 @@ public class SnackDao {
 		String sql = "select * from snack order by no asc";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
-		
+
 		List<SnackDto> list = new ArrayList<>();
 
 //		데이터 1줄 가공
@@ -79,26 +79,72 @@ public class SnackDao {
 
 	public List<SnackDto> search(String name) throws Exception {
 		Connection con = this.getConnection();
-		
+
 		String sql = "select * from snack where name like ? order by no asc";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, "%"+name+"%");
+		ps.setString(1, "%" + name + "%");
 		ResultSet rs = ps.executeQuery();
-		
+
 		List<SnackDto> list = new ArrayList<>();
-		
-		while(rs.next()) {
+
+		while (rs.next()) {
 			SnackDto dto = new SnackDto();
 			dto.setNo(rs.getInt("no"));
 			dto.setName(rs.getString("name"));
 			dto.setPrice(rs.getInt("price"));
 			dto.setStock(rs.getInt("stock"));
-		
+
 			list.add(dto);
 		}
-		
+
 		con.close();
-		
+
 		return list;
 	}
+
+	public boolean edit(SnackDto dto) throws Exception {
+		Connection con = getConnection();
+
+		String sql = "update snack set name=?, price=?, stock=? where no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, dto.getName());
+		ps.setInt(2, dto.getPrice());
+		ps.setInt(3, dto.getStock());
+		ps.setInt(4, dto.getNo());
+
+		int result = ps.executeUpdate();
+
+		con.close();
+
+		return result > 0;
+	}
+
+//	단일조회 가능
+//	이름 : get
+//	매개변수 : 번호(int)
+//	반환형 : 과자정보(SnackDto)
+
+	public SnackDto get(int no) throws Exception {
+		Connection con = this.getConnection();
+
+		String sql = "select * from snack where no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, no);
+		ResultSet rs = ps.executeQuery();
+		SnackDto dto;
+
+		if (rs.next()) {
+			dto = new SnackDto();
+			dto.setNo(rs.getInt("no"));
+			dto.setName(rs.getString("name"));
+			dto.setPrice(rs.getInt("price"));
+			dto.setStock(rs.getInt("stock"));
+		} else {
+			dto = null;
+		}
+
+		con.close();
+		return dto;
+	}
+
 }
