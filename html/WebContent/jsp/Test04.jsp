@@ -1,6 +1,6 @@
-<%@page import="beans.KHMemberDto"%>
+<%@page import="home.beans.KHMemberDto"%>
 <%@page import="java.util.List"%>
-<%@page import="beans.KHMemberDao"%>
+<%@page import="home.beans.KHMemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     

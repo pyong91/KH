@@ -1,6 +1,6 @@
 <%@page import="beans.SnackDto"%>
 <%@page import="java.util.List"%>
-<%@page import="beans.SnackDao"%>
+<%@page import="home.beans.SnackDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     

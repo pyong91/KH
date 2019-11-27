@@ -1,5 +1,5 @@
-<%@page import="beans.SnackDto"%>
-<%@page import="beans.SnackDao"%>
+<%@page import="home.beans.SnackDto"%>
+<%@page import="home.beans.SnackDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -19,7 +19,7 @@
 <body>
 <!-- 과자의 정보를 수정할 수 있도록 입력창을 제공 -->
 	<h2>정보 수정</h2>
-	<form action="edit.do" method="post">		
+	<form action="edit.do" method="post">
 		<input type="hidden" name="no" value="<%= dto.getNo() %>" readonly="readonly"><br><br>
 		<input type="text" name="name" value="<%= dto.getName() %>"><br><br>
 		<input type="text" name="price" value="<%= dto.getPrice() %>"><br><br>

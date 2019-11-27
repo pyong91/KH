@@ -1,6 +1,6 @@
-<%@page import="beans.SnackDto"%>
+<%@page import="home.beans.SnackDto"%>
 <%@page import="java.util.List"%>
-<%@page import="beans.SnackDao"%>
+<%@page import="home.beans.SnackDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!-- 목표: snack 테이블에 존재하는 데이터를 모두 불러와서 화면에 출력 -->
