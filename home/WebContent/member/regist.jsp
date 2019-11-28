@@ -62,7 +62,7 @@ pageEncoding="UTF-8"%>
           <tr>
           	<td>전화번호</td>
             <td>
-              <input type="text" name="phone" required="required" placeholder="전화번호"/>
+              <input type="tel" name="phone" required="required" placeholder="전화번호"/>
             </td>
           </tr>
           <tr>

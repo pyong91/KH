@@ -8,15 +8,27 @@
 -->
 
 <%
+//	로그인 상태 판정
 	String context = request.getContextPath();
+	String id = (String)session.getAttribute("id");
+	boolean login = id == null;
+	
+//	관리자 판정
+	String grade = (String)session.getAttribute("grade");
+	boolean admin = grade != null && grade.equals("관리자");
 %>
 
 <a href="<%= context %>">홈으로</a>
+<% if(login) { %>
 <a href="<%= context %>/member/regist.jsp">회원가입</a>
-<a href="#">회원정보</a>
 <a href="<%= context %>/member/login.jsp">로그인</a>
-<a href="#">로그아웃</a>
-
+<%} else {%>
+<a href="#">회원정보</a>
+<a href="<%= context %>/member/logout.do">로그아웃</a>
+<%} %>
 <a href="#">게시판</a>
 
+<% if(admin) {%>
 <a href="#">회원찾기</a>
+<%} %>
+

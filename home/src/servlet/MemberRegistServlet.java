@@ -27,7 +27,7 @@ public class MemberRegistServlet extends HttpServlet {
 			dto.setBasic_addr(req.getParameter("basic_addr"));
 			dto.setExtra_addr(req.getParameter("extra_addr"));
 			dto.setPhone(req.getParameter("phone"));
-
+			
 			MemberDao dao = new MemberDao();
 			
 			if(dao.checkId(dto)) {

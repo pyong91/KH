@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+<%
+	String context = request.getContextPath();
+%>
+
 <jsp:include page="/template/header.jsp"></jsp:include>
 
 <h2>로그인</h2>
@@ -31,7 +35,7 @@
 		</tr>
 		<tr>
 			<td>
-			<a href="#">아이디 찾기</a>
+			<a href="<%= context %>/member/find.jsp">아이디 찾기</a>
 			<a href="#">비밀번호 찾기</a>
 			<a href="<%= request.getContextPath() %>/member/regist.jsp">회원가입</a>
 			</td>
