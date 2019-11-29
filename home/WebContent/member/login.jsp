@@ -12,23 +12,23 @@
 <form action="login.do" method="post">
 	<table>
 		<!-- 아이디 입력창, 비밀번호 입력창, 아이디 저장하기, 로그인 버튼, 찾기 링크 -->
-		<tr>
+		<tr align="center">
 			<td>
 			<input type="text" name="id" placeholder="ID" required="required">
 			</td>
 		</tr>
-		<tr>
+		<tr align="center">
 			<td>
 			<input type="password" name="pw" placeholder="PW" required="required">
 			</td>
 		</tr>
-		<tr>
+		<tr align="center">
 			<td>
 			<input type="checkbox">
 			아이디 저장하기
 			</td>
 		</tr>
-		<tr align="right">
+		<tr align="center">
 			<td>
 			 <input type="submit" value="login">
 			</td>

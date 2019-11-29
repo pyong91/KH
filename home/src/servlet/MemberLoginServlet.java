@@ -28,6 +28,9 @@ public class MemberLoginServlet extends HttpServlet{
 				req.getSession().setAttribute("id", dto.getId());
 				req.getSession().setAttribute("grade", dto.getGrade());
 				
+//				추가 : 사용자의 최종 로그인 시간 업데이트
+				dao.updateLastLogin(dto.getId());
+				
 //				resp.sendRedirect("/home");
 //				resp.sendRedirect("/home/index.jsp");
 				resp.sendRedirect(req.getContextPath());

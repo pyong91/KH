@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MemberDao {
 
@@ -100,5 +102,114 @@ public class MemberDao {
 		}
 		con.close();
 		return null;
+	}
+
+//	최종 로그인 시간 변경 메소드
+	public void updateLastLogin(String id) throws Exception{
+		Connection con = getConnection();
+		
+		String sql = "update member set last_login = sysdate where id = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, id);
+		ps.execute();
+		
+		con.close();
+	}
+
+	public void exit(String id) throws Exception{
+		Connection con = getConnection();
+		
+		String sql = "delete member where id = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, id);
+		ps.execute();
+		
+		con.close();
+	}
+	
+	//비밀번호 변경 메소드
+	public void changePassword(String id, String pw) throws Exception{
+		Connection con = getConnection();
+
+		String sql = "update member set pw=? where id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, pw);
+		ps.setString(2, id);
+
+		ps.execute();
+
+		con.close();
+	}
+	
+	public void changeInfo(String id, String phone, String post, String basic_addr, String extra_addr) throws Exception{
+		Connection con = getConnection();
+		
+		String sql = "update member set phone= ?, post= ?, basic_addr=?, extra_addr=? where id = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, phone);
+		ps.setString(2, post);
+		ps.setString(3, basic_addr);
+		ps.setString(4, extra_addr);
+		ps.setString(5, id);
+		ps.execute();
+		
+		con.close();
+	}
+	
+	public void changeInfo(MemberDto dto) throws Exception{
+		this.changeInfo(dto.getId(), dto.getPhone(), dto.getPost(), dto.getBasic_addr(), dto.getExtra_addr());
+	}
+	
+	public List<MemberDto> getMemberList() throws Exception{
+		Connection con = getConnection();
+		String sql = "select * from member";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		List<MemberDto> list = new ArrayList<>();
+		while(rs.next()) {
+			MemberDto dto = new MemberDto();
+			
+			dto.setId(rs.getString("id"));
+			dto.setPw(rs.getString("pw"));
+			dto.setName(rs.getString("name"));
+			dto.setJoindate(rs.getString("joindate"));
+			dto.setGrade(rs.getString("grade"));
+			dto.setPoint(rs.getInt("point"));
+			dto.setPost(rs.getString("post"));
+			dto.setBasic_addr(rs.getString("basic_addr"));
+			dto.setExtra_addr(rs.getString("extra_addr"));
+			dto.setPhone(rs.getString("phone"));
+			dto.setLast_login(rs.getString("last_login"));
+			
+			list.add(dto);
+		}
+		return list;
+	}
+	
+	public List<MemberDto> search(String id) throws Exception{
+		Connection con = getConnection();
+		String sql = "select * from member where id like ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, "%"+id+"%");
+		ResultSet rs = ps.executeQuery();
+		List<MemberDto> list = new ArrayList<>();
+		while(rs.next()) {
+			MemberDto dto = new MemberDto();
+			
+			dto.setId(rs.getString("id"));
+			dto.setPw(rs.getString("pw"));
+			dto.setName(rs.getString("name"));
+			dto.setJoindate(rs.getString("joindate"));
+			dto.setGrade(rs.getString("grade"));
+			dto.setPoint(rs.getInt("point"));
+			dto.setPost(rs.getString("post"));
+			dto.setBasic_addr(rs.getString("basic_addr"));
+			dto.setExtra_addr(rs.getString("extra_addr"));
+			dto.setPhone(rs.getString("phone"));
+			dto.setLast_login(rs.getString("last_login"));
+			
+			list.add(dto);
+		}
+		return list;
 	}
 }

@@ -23,7 +23,7 @@
 <a href="<%= context %>/member/regist.jsp">회원가입</a>
 <a href="<%= context %>/member/login.jsp">로그인</a>
 <%} else {%>
-<a href="#">회원정보</a>
+<a href="<%= context %>/member/info.jsp">회원정보</a>
 <a href="<%= context %>/member/logout.do">로그아웃</a>
 <%} %>
 <a href="#">게시판</a>
