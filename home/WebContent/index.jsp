@@ -17,7 +17,7 @@
  --%>
 <jsp:include page="/template/header.jsp"></jsp:include>
 
-<h3>환영합니다</h3>
+<h3>환영합니다</h3>	
 <img src="/home/image/고양이.jpg" width="70%">
 
 <jsp:include page="/template/footer.jsp"></jsp:include>

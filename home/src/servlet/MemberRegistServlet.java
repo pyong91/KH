@@ -30,7 +30,7 @@ public class MemberRegistServlet extends HttpServlet {
 			
 			MemberDao dao = new MemberDao();
 			
-			if(dao.checkId(dto)) {
+			if(dao.checkId(dto)) {	
 				resp.sendRedirect(req.getContextPath() + "/member/regist.jsp?error");
 			}
 			else {

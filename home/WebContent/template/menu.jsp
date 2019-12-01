@@ -29,6 +29,6 @@
 <a href="#">게시판</a>
 
 <% if(admin) {%>
-<a href="#">회원찾기</a>
+<a href="<%= context %>/admin/list.jsp">회원찾기</a>
 <%} %>
 
