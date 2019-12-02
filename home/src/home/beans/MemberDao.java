@@ -185,12 +185,14 @@ public class MemberDao {
 		}
 		return list;
 	}
-	
-	public List<MemberDto> search(String id) throws Exception{
+//	관리자 기능(조회)
+	public List<MemberDto> search(String type, String keyword) throws Exception{
 		Connection con = getConnection();
-		String sql = "select * from member where id like ?";
+		String sql = "select * from member where "
+						+ type +" like '%'||?||'%' order by "
+						+ type +" asc";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, "%"+id+"%");
+		ps.setString(1, keyword);
 		ResultSet rs = ps.executeQuery();
 		List<MemberDto> list = new ArrayList<>();
 		while(rs.next()) {
@@ -210,6 +212,26 @@ public class MemberDao {
 			
 			list.add(dto);
 		}
+		con.close();
 		return list;
+	}
+	
+	public void adminChangeInfo(MemberDto dto) throws Exception{
+		Connection con = getConnection();
+		
+		String sql = "update member set phone= ?, post= ?, basic_addr=?, "
+				+ "extra_addr=?, grade=?, point=?, name=? where id = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, dto.getPhone());
+		ps.setString(2, dto.getPost());
+		ps.setString(3, dto.getBasic_addr());
+		ps.setString(4, dto.getExtra_addr());
+		ps.setString(5, dto.getGrade());
+		ps.setInt(6, dto.getPoint());
+		ps.setString(7, dto.getName());
+		ps.setString(8, dto.getId());
+		ps.execute();
+		
+		con.close();
 	}
 }

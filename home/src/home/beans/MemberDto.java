@@ -132,18 +132,24 @@ public class MemberDto {
 	public String getJoindateWithFormat() throws ParseException {
 //		[1] 내가 가진 가입일을 날짜 형식(java.util.Date)으로 변환 - .parse()
 //		[2] 1번 결과를 다시 원하는 형식의 문자열로 변환 - .format()
-		SimpleDateFormat read = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
-		Date date = read.parse(joindate);
-		SimpleDateFormat write = new SimpleDateFormat("y년 M월 d일");
-		String time = write.format(date);
-		return time;
+		if(joindate!=null) {
+			SimpleDateFormat read = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+			Date date = read.parse(joindate);
+			SimpleDateFormat write = new SimpleDateFormat("y년 M월 d일");
+			String time = write.format(date);
+			return time;
+		} 
+		else return "";
 	}
 	
 	public String getLast_loginWithFormat() throws Exception{
-		SimpleDateFormat read = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
-		Date date = read.parse(last_login);
-		SimpleDateFormat write = new SimpleDateFormat("y년 M월 d일 m시 d분");
-		String time = write.format(date);
-		return time;
+		if(last_login!=null) {
+			SimpleDateFormat read = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+			Date date = read.parse(last_login);
+			SimpleDateFormat write = new SimpleDateFormat("y년 M월 d일 m시 d분");
+			String time = write.format(date);
+			return time;
+		} 
+		else return "";
 	}
 }
