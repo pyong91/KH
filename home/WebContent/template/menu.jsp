@@ -26,7 +26,7 @@
 <a href="<%= context %>/member/info.jsp">회원정보</a>
 <a href="<%= context %>/member/logout.do">로그아웃</a>
 <%} %>
-<a href="#">게시판</a>
+<a href="<%=context%>/board/list.jsp">게시판</a>
 
 <% if(admin) {%>
 <a href="<%= context %>/admin/list.jsp">회원찾기</a>
