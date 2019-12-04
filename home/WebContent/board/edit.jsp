@@ -1,13 +1,18 @@
+<%@page import="home.beans.BoardDao"%>
+<%@page import="home.beans.BoardDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	String id = (String)request.getSession().getAttribute("id");
+	int no = Integer.parseInt(request.getParameter("no"));
+	
+	BoardDao bdao = new BoardDao();
+	BoardDto bdto = bdao.getInfo(no);
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 
 <div align="center">
-	<form action="write.do" method="post">
+	<form action="edit.do" method="post">
 	<table size="80%">
 		<tr>
 			<th>게시글 작성</th>
@@ -22,15 +27,16 @@
 		</tr>
 		<tr>
 			<th>제목</th>
-			<td><input type="text" name="title" placeholder="게시글 제목을 입력하세요" required></td>
+			<td><input type="text" name="title" value="<%=bdto.getTitle() %>" placeholder="게시글 제목을 입력하세요" required></td>
 		</tr>
 		<tr>
 			<td colspan="2">
-				<textarea name="content" rows="15" cols="100" required style="resize:vertical"></textarea>
+				<textarea name="content" rows="15" cols="100" required style="resize:vertical"><%= bdto.getContent() %></textarea>
 			</td>
 		</tr>
-		<tr>
-			<td><input type="submit" value="확인"></td>
+		<tr align="right"><td>
+			<input type="submit" value="확인">
+			<input type="hidden" name="no" value="<%=no %>"></td>
 		</tr>
 	</table>
 	</form>

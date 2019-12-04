@@ -9,19 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import home.beans.BoardDao;
+import home.beans.BoardDto;
 
-@WebServlet(urlPatterns = "delete.do")
-public class BoardDeleteServlet extends HttpServlet{
+@WebServlet(urlPatterns = "/board/delete.do")
+public class BoardDeleteServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			int no = Integer.parseInt(req.getParameter("no"));
-			
+
 			BoardDao dao = new BoardDao();
 			dao.delete(no);
 			resp.sendRedirect("list.jsp");
-		}
-		catch(Exception e) {
+			
+		} catch (Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);
 		}
