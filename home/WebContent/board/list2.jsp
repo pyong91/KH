@@ -5,47 +5,20 @@
     pageEncoding="UTF-8"%>
     
 <%	
-
-	// 페이징 추가
-	
-	// 페이지크기
-	int pagesize = 10;
-	// 네비게이터 크기
-	int navsize = 10;
-	
-	int pno;
-	try{
-		pno = Integer.parseInt(request.getParameter("pno"));
-		if(pno <= 0) throw new Exception();
-	}
-	catch(Exception e){
-		pno = 1;
-	}
-
-	
-	int finish = pno * pagesize;
-	int start = finish - (pagesize - 1);
-	
 	String type = request.getParameter("type");
 	String keyword = request.getParameter("keyword");
 	
 	boolean isSearch = type != null && keyword != null;
-	
 	List<BoardDto> list;
 	BoardDao dao = new BoardDao();
 
 	if(isSearch){
-		list = dao.search(type, keyword, start, finish);
+		list = dao.search(type, keyword);
 	} else {
-		list = dao.getList(start, finish);
+		list = dao.getList();
 	}
-	/***************************************************
-		하단 네비게이터 계산하기
-		 - 시작블록 = (현재페이지-1) / 네비게이터크기 * 네비게이터크기 + 1
-	***************************************************/
-	int count = dao.getCount(type, keyword);
 	
-
+	
 %>    
     
 <style>
@@ -98,19 +71,13 @@ th, td{
 </div>
 	<div class="footer">
 		<div class="page">
-			<jsp:include page="/template/navigator.jsp">
-				<jsp:param name="pno" value="<%=pno%>"/>
-				<jsp:param name="count" value="<%=count%>"/>
-				<jsp:param name="navsize" value="<%=navsize%>"/>
-				<jsp:param name="pagesize" value="<%=pagesize%>"/>
-			</jsp:include>
+			<h4>이전 1 2 3 4 5 6 7 8 9 10 다음</h4>
 			<form action="write.jsp">
 				<input type="submit" value="글쓰기">
 			</form>
 		</div>
-
 		<div class="search">
-			<form action="list.jsp" method="get">
+			<form action="list.jsp">
 				<select name="type">
 					<option value="no">번호</option>
 					<option value="title">제목</option>
