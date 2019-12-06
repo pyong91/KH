@@ -54,6 +54,14 @@
 		<tr>
 			<td>조회수 : <%=bdto.getReadCount() %> 댓글수 : <%=bdto.getReplyCount() %></td>
 		</tr>
+		<tr>
+			<td>
+				<form action="" method="post">
+					<textarea name="" rows="4" cols="100" required></textarea>
+					<input type="submit" value="등록">
+				</form>
+			</td>
+		</tr>
 	</table>
 </div>
 <div style="padding: 10px 0px">
