@@ -58,7 +58,7 @@
 </div>
 <div style="padding: 10px 0px">
 	<a href="write.jsp"><input type="button" value="글쓰기"></a>
-	<a href="#"><input type="button" value="답글쓰기"></a>
+	<a href="write.jsp?superno=<%= bdto.getNo() %>"><input type="button" value="답글쓰기"></a>
 	<%if(isMine || isAdmin) {%>
 		<a href="list.jsp"><input type="button" value="목록"></a>
 		<a href="edit.jsp?no=<%=no%>"><input type="button" value="수정"></a>	

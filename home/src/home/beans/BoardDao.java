@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +39,10 @@ public class BoardDao {
 		
 		String sql = "select * from ("
 						+ "select rownum rn, A.* from ("
-							+ "select * from board order by no desc"
+							+ "select * from board "
+							+ "connect by prior no = superno "
+							+ "start with superno is null "
+							+ "order siblings by groupno desc, no asc"
 						+ ")A"
 					+ ") where rn between ? and ?";
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -59,22 +63,40 @@ public class BoardDao {
 			dto.setReadCount(rs.getInt("readcount"));
 			dto.setContent(rs.getString("content"));
 			
+			dto.setGroupno(rs.getInt("groupno"));
+			dto.setSuperno(rs.getInt("superno"));
+			dto.setDepth(rs.getInt("depth"));
+			
 			list.add(dto);
 		}
 		
 		con.close();
 		return list;
 	}
-	
+//	등록 - 새글도 등록하고 답글도 등록해야함
+//	새글일 경우 no, head, title, content가 들어있다
+//	답글일 경우 no, group, depth, head, title, content
 	public void write(BoardDto dto) throws Exception{
 		Connection con = getConnection();
-		String sql = "insert into board values(?, ?, ?, 0, ?, sysdate, 0, ?)";
+		// [1]no, [2]head [3]title, [4]writer, [5]content, [6]groupno, [7]superno, [8]depth
+		String sql = "insert into board values(?, ?, ?, 0, ?, sysdate, 0, ?, ?, ?, ?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, dto.getNo());
 		ps.setString(2, dto.getHead());
 		ps.setString(3, dto.getTitle());
 		ps.setString(4, dto.getWriter());
 		ps.setString(5, dto.getContent());
+		
+		if(dto.getGroupno()==0) { // 새글
+			ps.setInt(6, dto.getNo());			
+			ps.setNull(7, Types.INTEGER); // 숫자에 들어가는 널
+			ps.setInt(8, 0);
+		}
+		else { // 답글
+			ps.setInt(6, dto.getGroupno()); // 원본글 그룹번호
+			ps.setInt(7, dto.getSuperno()); // 원본글 번호
+			ps.setInt(8, dto.getDepth()+1);
+		}
 		
 		ps.execute();
 		
@@ -98,6 +120,10 @@ public class BoardDao {
 		dto.setWdate(rs.getString("wdate"));
 		dto.setReadCount(rs.getInt("readcount"));
 		dto.setContent(rs.getString("content"));
+		dto.setGroupno(rs.getInt("groupno"));
+		dto.setSuperno(rs.getInt("superno"));
+		dto.setDepth(rs.getInt("depth"));
+		
 		
 		con.close();
 		return dto;
@@ -142,7 +168,10 @@ public class BoardDao {
 		
 		String sql = "select * from ("
 				+ "select rownum rn, A.* from ("
-				+ "select * from board where "+type+" like '%'||?||'%' order by no desc"
+				+ "select * from board where "+type+" like '%'||?||'%' "
+				+ "connect by prior no = superno "
+				+ "start with superno is null "
+				+ "order siblings by groupno desc, no asc"
 				+ ")A"
 				+ ") where rn between ? and ?";
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -163,6 +192,10 @@ public class BoardDao {
 			dto.setWdate(rs.getString("wdate"));
 			dto.setReadCount(rs.getInt("readcount"));
 			dto.setContent(rs.getString("content"));
+			
+			dto.setGroupno(rs.getInt("groupno"));
+			dto.setSuperno(rs.getInt("superno"));
+			dto.setDepth(rs.getInt("depth"));
 			
 			list.add(dto);
 		}

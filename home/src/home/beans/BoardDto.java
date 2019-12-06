@@ -13,6 +13,9 @@ public class BoardDto {
 	private int readCount;
 	private String content;
 	
+	//계층형 게시판과 관련된 값들을 추가
+	private int groupno, superno, depth;
+	
 	
 	@Override
 	public String toString() {
@@ -23,7 +26,7 @@ public class BoardDto {
 		super();
 	}
 	public BoardDto(int no, String head, String title, int replycount, String writer, String wdate, int readcount,
-			String content) {
+			String content, int groupno, int superno, int depth) {
 		super();
 		this.no = no;
 		this.head = head;
@@ -33,6 +36,28 @@ public class BoardDto {
 		this.wdate = wdate;
 		this.readCount = readcount;
 		this.content = content;
+		this.groupno = groupno;
+		this.superno = superno;
+		this.depth = depth;
+	}
+	
+	public int getGroupno() {
+		return groupno;
+	}
+	public void setGroupno(int groupno) {
+		this.groupno = groupno;
+	}
+	public int getSuperno() {
+		return superno;
+	}
+	public void setSuperno(int superno) {
+		this.superno = superno;
+	}
+	public int getDepth() {
+		return depth;
+	}
+	public void setDepth(int depth) {
+		this.depth = depth;
 	}
 	public int getNo() {
 		return no;

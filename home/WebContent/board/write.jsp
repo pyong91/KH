@@ -8,6 +8,9 @@
 
 <div align="center">
 	<form action="write.do" method="post">
+	<%if(request.getParameter("superno")!=null) {%>
+		<input type="hidden" name="superno" value="<%=request.getParameter("superno") %>">
+	<%} %>
 	<table size="80%">
 		<tr>
 			<th>게시글 작성</th>

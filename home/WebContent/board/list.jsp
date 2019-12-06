@@ -50,7 +50,6 @@
     
 <style>
 .body{
-	
 }
 .con_table{
 padding-top: 10px;
@@ -59,7 +58,6 @@ padding-top: 10px;
 }
 th, td{
  height: 30px;
- 
 }
 </style>    
 
@@ -70,6 +68,9 @@ th, td{
 	<table width="80%">
 		<tr>
 			<th>번호</th>
+			<th>그룹</th>
+			<th>상위</th>
+			<th>차수</th>
 			<th align="left">제목</th>
 			<th>작성자</th>
 			<th>작성일</th>
@@ -78,7 +79,17 @@ th, td{
 		<%for(BoardDto dto : list){ %>
 			<tr  align="center">
 				<td width="60px"><%=dto.getNo() %></td>
-				<td align="left"><a href="content.jsp?no=<%=dto.getNo() %>">
+				<td width="60px"><%=dto.getGroupno() %></td>
+				<td width="60px"><%=dto.getSuperno() %></td>
+				<td width="60px"><%=dto.getDepth() %></td>
+				<td align="left">
+				<%for(int i=0;i<dto.getDepth();i++) {%>
+					&nbsp;&nbsp;
+				<%} %>
+				<%if(dto.getDepth()>0) {%>
+					<img src="<%=request.getContextPath() %>/image/reply.png" width="30">
+				<%} %>
+				<a href="content.jsp?no=<%=dto.getNo() %>">
 				<%if(dto.getHead()!=null) {%>
 				[<%=dto.getHead() %>]
 				<%} %>
