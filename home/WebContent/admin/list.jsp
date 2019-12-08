@@ -8,16 +8,19 @@
 	String id = request.getParameter("id");
 	List<MemberDto> list = dao.search(id);
 %>
-
+<style>
+.list{
+padding-top: 30px;
+}
+</style>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
-
 <h1>회원 검색</h1>
 <form action="list.jsp">
 	<input type="text" name="id" placeholder="아이디"> <input
 		type="submit" value="검색">
 		
-<div align="center">
+<div align="center" class="list">
 	<table border="1">
 	<%if(list.size()!=0) {%>
 		<thead>
