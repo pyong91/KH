@@ -25,7 +25,7 @@
 	
 	int finish = pno * pagesize;
 	int start = finish - (pagesize - 1);
-	
+		
 	String type = request.getParameter("type");
 	String keyword = request.getParameter("keyword");
 	

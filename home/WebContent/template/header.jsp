@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>내가만든 홈페이지</title>
+<title>홈피</title>
 </head>
 <body>
 	<!-- 
@@ -21,7 +21,7 @@
 					<br>
 					<!-- 더미 이미지(dummy image) 생성 -->
 					<img src="http://placehold.it/200x40?text=logo"><br>
-					<font size="4">홈페이지 2주만에 마스터하기</font>
+					<font size="4">홈피</font>
 					<br><br>
 				</th>
 			</tr>

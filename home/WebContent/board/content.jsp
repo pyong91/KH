@@ -1,3 +1,6 @@
+<%@page import="java.util.List"%>
+<%@page import="home.beans.ReplyDto"%>
+<%@page import="home.beans.ReplyDao"%>
 <%@page import="java.util.HashSet"%>
 <%@page import="java.util.Set"%>
 <%@page import="home.beans.BoardDto"%>
@@ -36,6 +39,10 @@
 		bdto.setReadCount(bdto.getReadCount()+1);
 		bdao.readCountPlus(no);
 	}
+	
+// 댓글
+	ReplyDao dao = new ReplyDao();
+	List<ReplyDto> list = dao.getList(no);
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -54,15 +61,41 @@
 		<tr>
 			<td>조회수 : <%=bdto.getReadCount() %> 댓글수 : <%=bdto.getReplyCount() %></td>
 		</tr>
+	</table>
+		
+		<!-- 댓글 시작 -->
+	<table border="0" width="70%" style="background-color: #F9F9F9;">
+		<tr>
+			<td colspan="3">
+				댓글 목록
+			</td>
+		</tr>
+		<%for(ReplyDto dto : list) {%>
+				<tr>
+					<td rowspan="2" width="30px" align="center" valign="middle">
+						<img src="#" style="size: 10%">
+					</td>
+					<td width="50px"><%=dto.getWriter() %></td>
+					<td><%=dto.getWdateWithFormat() %></td>
+				</tr>
+				<tr>
+					<td colspan="2" style="border-bottom: 1px dotted;"><%=dto.getContent() %></td>
+				</tr>
+			
+		<%} %>
+	</table>
+	<table border="0" width="70%">
 		<tr>
 			<td>
-				<form action="" method="post">
-					<textarea name="" rows="4" cols="100" required></textarea>
+				<form action="reply_insert.do" method="post">
+					<textarea name="content" rows="4" cols="92" required></textarea>
 					<input type="submit" value="등록">
+					<input type="hidden" name="origin" value="<%=bdto.getNo()%>">
 				</form>
 			</td>
 		</tr>
 	</table>
+		<!-- 댓글 끝 -->
 </div>
 <div style="padding: 10px 0px">
 	<a href="write.jsp"><input type="button" value="글쓰기"></a>
