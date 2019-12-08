@@ -1,18 +1,37 @@
 package home.beans;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 public class MemberDao {
 
+//	자원을 참조하는 변수 생성(리모컨)
+//	DataSource source = context.xml의 자원정보 / 한번에 못구함;
+	private static DataSource source;
+	static {
+		// source에 context.xml의 Resource 정보를 설정
+		// [1] 탐색 도구 생성
+		// [2] 도구를 이용하여 탐색 후 source에 대입
+		try {
+			InitialContext ctx = new InitialContext(); //[1]
+			source = (DataSource) ctx.lookup("java:comp/env/jdbc/oracle"); // name="jdbc/oracle" 찾아
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 //	연결 메소드
 	public Connection getConnection() throws Exception {
-		Class.forName("oracle.jdbc.OracleDriver");
-		return DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "home", "home");
+//		return common-dbcp에서 관리하는 연결을 빌려와라;
+		return source.getConnection();
 	}
 
 	public boolean login(String id, String pw) throws Exception {
@@ -185,12 +204,14 @@ public class MemberDao {
 		}
 		return list;
 	}
-	
-	public List<MemberDto> search(String id) throws Exception{
+//	관리자 기능(조회)
+	public List<MemberDto> search(String type, String keyword) throws Exception{
 		Connection con = getConnection();
-		String sql = "select * from member where id like ?";
+		String sql = "select * from member where "
+						+ type +" like '%'||?||'%' order by "
+						+ type +" asc";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, "%"+id+"%");
+		ps.setString(1, keyword);
 		ResultSet rs = ps.executeQuery();
 		List<MemberDto> list = new ArrayList<>();
 		while(rs.next()) {
@@ -210,6 +231,26 @@ public class MemberDao {
 			
 			list.add(dto);
 		}
+		con.close();
 		return list;
+	}
+	
+	public void adminChangeInfo(MemberDto dto) throws Exception{
+		Connection con = getConnection();
+		
+		String sql = "update member set phone= ?, post= ?, basic_addr=?, "
+				+ "extra_addr=?, grade=?, point=?, name=? where id = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, dto.getPhone());
+		ps.setString(2, dto.getPost());
+		ps.setString(3, dto.getBasic_addr());
+		ps.setString(4, dto.getExtra_addr());
+		ps.setString(5, dto.getGrade());
+		ps.setInt(6, dto.getPoint());
+		ps.setString(7, dto.getName());
+		ps.setString(8, dto.getId());
+		ps.execute();
+		
+		con.close();
 	}
 }
