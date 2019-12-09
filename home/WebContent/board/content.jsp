@@ -1,3 +1,5 @@
+<%@page import="home.beans.FilesDto"%>
+<%@page import="home.beans.FilesDao"%>
 <%@page import="java.util.List"%>
 <%@page import="home.beans.ReplyDto"%>
 <%@page import="home.beans.ReplyDao"%>
@@ -40,26 +42,49 @@
 		bdao.readCountPlus(no);
 	}
 	
-// 댓글
+// 	댓글
 	ReplyDao dao = new ReplyDao();
 	List<ReplyDto> list = dao.getList(no);
+	
+// 	파일
+	FilesDao fdao = new FilesDao();
+	List<FilesDto> flist = fdao.getList(no);
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 
-<div align="center">
-	<table border="1" width="70%">
+<div align="center" style="padding-top:10px">
+	<table width="70%" border="1px">
 		<tr>
 			<td><%=bdto.getTitle() %></td>
 		</tr>
 		<tr>
-			<td><%=bdto.getWriter() %></td>
+			<td colspan="2"><%=bdto.getWriter() %></td>
 		</tr>		
 		<tr height="200">
-			<td valign="top"><%=bdto.getContent() %></td>
+			<td valign="top" colspan="2"><%=bdto.getContent() %></td>
 		</tr>
+			<!-- 첨부 파일 시작 -->
+	<%if(flist.size()>0) {%>
+	<tr>
+		<td>
+		<ul>
+			<%for(FilesDto fdto : flist) {%>
+				<li>
+					<%=fdto.getUploadName() %>
+					(<%=fdto.getFileSize() %> byte)			
+					<a href="download.do?<%=fdto.getFiles_no() %>">
+						<img src="../image/download.png" width="15" height="15">
+					</a>
+				</li>
+			<%} %>
+		</ul>
+		</td>
+	</tr>
+	<%} %>
+	<!-- 첨부 파일 끝 -->
 		<tr>
-			<td>조회수 : <%=bdto.getReadCount() %> 댓글수 : <%=bdto.getReplyCount() %></td>
+			<td>조회수 : <%=bdto.getReadCount() %>   댓글수 : <%=bdto.getReplyCount() %></td>
 		</tr>
 	</table>
 		
@@ -70,16 +95,29 @@
 				댓글 목록
 			</td>
 		</tr>
-		<%for(ReplyDto dto : list) {%>
+		<%for(ReplyDto rdto : list) {%>
 				<tr>
-					<td rowspan="2" width="30px" align="center" valign="middle">
-						<img src="#" style="size: 10%">
+					<td rowspan="2" width="50px" align="center" valign="middle">
+						<img src="<%=request.getContextPath() %>/image/고양이.jpg" width="30px" height="30px">
 					</td>
-					<td width="50px"><%=dto.getWriter() %></td>
-					<td><%=dto.getWdateWithFormat() %></td>
+					<td width="100px"><%=rdto.getWriter() %>
+						<%if(rdto.getWriter().equals(bdto.getWriter())) {%>
+						<font color="red">[작성자]</font>
+						<%} %>
+					</td>
+					<td><%=rdto.getWdateWithFormat() %></td>
+					<%if(rdto.getWriter().equals(userId)) {%>
+						<td align="right">
+							<form action="reply_delete.do" method="post">
+								<input type="submit" value="삭제">
+								<input type="hidden" name="origin" value="<%=rdto.getOrigin() %>">
+								<input type="hidden" name="reply_no" value="<%=rdto.getReply_no() %>">
+							</form>
+						</td>
+					<%} %>
 				</tr>
 				<tr>
-					<td colspan="2" style="border-bottom: 1px dotted;"><%=dto.getContent() %></td>
+					<td colspan="2" style="border-bottom: 1px dotted;"><%=rdto.getContent() %></td>
 				</tr>
 			
 		<%} %>

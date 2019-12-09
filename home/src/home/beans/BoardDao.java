@@ -247,4 +247,13 @@ public class BoardDao {
 		ps.execute();
 		con.close();
 	}
+	
+	public void replyCountMinus(int no) throws Exception{
+		Connection con = getConnection();
+		String sql = "update board set replycount = replycount-1 where no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, no);
+		ps.execute();
+		con.close();
+	}
 }

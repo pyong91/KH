@@ -12,11 +12,11 @@
 	List<BoardDto> list;
 	BoardDao dao = new BoardDao();
 
-	if(isSearch){
-		list = dao.search(type, keyword);
-	} else {
-		list = dao.getList();
-	}
+// 	if(isSearch){
+// 		list = dao.search(type, keyword);
+// 	} else {
+// 		list = dao.getList();
+// 	}
 	
 	
 %>    
@@ -47,26 +47,26 @@ th, td{
 			<th>작성자</th>
 			<th>작성일</th>
 			<th>조회</th>
-		</tr>
-		<%for(BoardDto dto : list){ %>
-			<tr  align="center">
-				<td width="60px"><%=dto.getNo() %></td>
-				<td align="left"><a href="content.jsp?no=<%=dto.getNo() %>">
-				<%if(dto.getHead()!=null) {%>
-				[<%=dto.getHead() %>]
-				<%} %>
-				<%=dto.getTitle() %>
-				<%if(dto.getReplyCount()>0) {%>
-				<font color="red">
-				[<%=dto.getReplyCount() %>]
-				</font>
-				<%} %>
-				</a></td>
-				<td width="120px"><%=dto.getWriter() %></td>
-				<td width="120px"><%=dto.getWdateWithFormat() %></td>
-				<td width="50px"><%=dto.getReadCount() %></td>
-			</tr>
-		<%} %>
+<!-- 		</tr> -->
+<%-- 		<%for(BoardDto dto : list){ %> --%>
+<!-- 			<tr  align="center"> -->
+<%-- 				<td width="60px"><%=dto.getNo() %></td> --%>
+<%-- 				<td align="left"><a href="content.jsp?no=<%=dto.getNo() %>"> --%>
+<%-- 				<%if(dto.getHead()!=null) {%> --%>
+<%-- 				[<%=dto.getHead() %>] --%>
+<%-- 				<%} %> --%>
+<%-- 				<%=dto.getTitle() %> --%>
+<%-- 				<%if(dto.getReplyCount()>0) {%> --%>
+<!-- 				<font color="red"> -->
+<%-- 				[<%=dto.getReplyCount() %>] --%>
+<!-- 				</font> -->
+<%-- 				<%} %> --%>
+<!-- 				</a></td> -->
+<%-- 				<td width="120px"><%=dto.getWriter() %></td> --%>
+<%-- 				<td width="120px"><%=dto.getWdateWithFormat() %></td> --%>
+<%-- 				<td width="50px"><%=dto.getReadCount() %></td> --%>
+<!-- 			</tr> -->
+<%-- 		<%} %> --%>
 	</table>
 </div>
 	<div class="footer">

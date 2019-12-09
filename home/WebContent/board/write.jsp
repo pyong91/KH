@@ -7,7 +7,7 @@
 <jsp:include page="/template/header.jsp"></jsp:include>
 
 <div align="center">
-	<form action="write.do" method="post">
+	<form action="write.do" method="post" enctype="multipart/form-data">
 	<%if(request.getParameter("superno")!=null) {%>
 		<input type="hidden" name="superno" value="<%=request.getParameter("superno") %>">
 	<%} %>
@@ -26,6 +26,11 @@
 		<tr>
 			<th>제목</th>
 			<td><input type="text" name="title" placeholder="게시글 제목을 입력하세요" required></td>
+		</tr>
+		<tr>
+			<td colspan="2">파일 이름
+				<input type="file" name="file" accept=".jpg, .png, .gif">
+			</td>
 		</tr>
 		<tr>
 			<td colspan="2">

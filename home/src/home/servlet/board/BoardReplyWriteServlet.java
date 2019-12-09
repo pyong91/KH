@@ -13,7 +13,7 @@ import home.beans.ReplyDao;
 import home.beans.ReplyDto;
 
 @WebServlet(urlPatterns = "/board/reply_insert.do")
-public class ReplyWriteServlet extends HttpServlet {
+public class BoardReplyWriteServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
