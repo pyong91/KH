@@ -75,21 +75,24 @@ public class FilesDao {
 
 	public FilesDto getInfo(int no) throws Exception{
 		Connection con = getConnection();
-		
+
 		String sql = "select * from files where no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, no);
 		ResultSet rs = ps.executeQuery();
-		
+
 		FilesDto fdto = null;
 		if(rs.next()) {
 			fdto = new FilesDto();
 			fdto.setFiles_no(rs.getInt("no"));
-			fdto.setFileSize(rs.getLong("filesize"));
-			fdto.setFileType(rs.getString("filetype"));
 			fdto.setOrigin(rs.getInt("origin"));
-			fdto.setSaveName(rs.getString("savename"));
 			fdto.setUploadName(rs.getString("uploadname"));
+			fdto.setSaveName(rs.getString("savename"));
+			fdto.setFileType(rs.getString("filetype"));
+			fdto.setFileSize(rs.getLong("filesize"));
 		}
+
+		con.close();
 		return fdto;
 	}
 }

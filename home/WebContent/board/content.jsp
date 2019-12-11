@@ -68,17 +68,22 @@
 	<%if(flist.size()>0) {%>
 	<tr>
 		<td>
-		<ul>
-			<%for(FilesDto fdto : flist) {%>
-				<li>
-					<%=fdto.getUploadName() %>
-					(<%=fdto.getFileSize() %> byte)			
-					<a href="download.do?<%=fdto.getFiles_no() %>">
-						<img src="../image/download.png" width="15" height="15">
-					</a>
-				</li>
-			<%} %>
-		</ul>
+				 <ul>
+				 	<%for(FilesDto fdto : flist){ %>
+					 	<li>
+					 		<!-- 미리보기 출력 -->
+					 		<img src="download.do?no=<%=fdto.getFiles_no()%>" width="80" height="50">
+
+					 		<%=fdto.getUploadName()%>
+					 		(<%=fdto.getFileSize()%> bytes)
+
+					 		<img src="../image/download.png" width="15" height="15">
+					 		<a href="download.do?no=<%=fdto.getFiles_no()%>">
+					 			<img src="../image/download.png" width="15" height="15">
+					 		</a>
+					 	</li>
+				 	<%} %>
+				 </ul>
 		</td>
 	</tr>
 	<%} %>

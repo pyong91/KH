@@ -20,27 +20,28 @@ public class BoardDownloadServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-//			계획 :
-//			[1] 파라미터를 받은다 (no)
+//			계획 : 
+//			[1] 파라미터를 받는다(no)
 			int no = Integer.parseInt(req.getParameter("no"));
-			
+
 //			[2] no에 대한 파일정보를 불러와야 한다(단일조회)
 			FilesDao fdao = new FilesDao();
 			FilesDto fdto = fdao.getInfo(no);
-			
+
 //			[3] 실제 파일을 읽어들인다.
-			File target = new File("D:/upload/home",fdto.getSaveName());
+			File target = new File("D:/upload/home", fdto.getSaveName());
 			byte[] data = FileUtils.readFileToByteArray(target);
-			
+
 //			[4] 읽어들인 내용을 사용자에게 전송한다
-//			 - text/html -image/png, image/jpg, image/gif 와 같이 할 경우 이미지란 뜻
-//			 - application/octet-stream 으로 설정할 경우 "다운로드" 받으라는 뜻
-			
+//				- image/png, image/jpg, image/gif 와 같이 할 경우 이미지란 뜻
+//				- application/octet-stream 으로 설정할 경우 "다운로드" 받으란 뜻
+
 //			resp.setContentType("application/octet-stream; charset=UTF-8");
 			resp.setHeader("Content-Type", "application/octet-stream; charset=UTF-8");
-			resp.setHeader("Content-Disposition", "attachment; filename=\""+URLEncoder.encode(fdto.getUploadName(),"UTF-8")+"\"");
+			resp.setHeader("Content-Disposition", "attachment; filename=\""+URLEncoder.encode(fdto.getUploadName(), "UTF-8")+"\"");
+//			resp.setHeader("Content-Length", "" + fdto.getFilesize());
 			resp.setHeader("Content-Length", String.valueOf(fdto.getFileSize()));
-			
+
 //			resp에 존재하는 outputstream으로 불러온 파일을 전송(파일 byte 입출력과 유사)
 			resp.getOutputStream().write(data);
 		}
