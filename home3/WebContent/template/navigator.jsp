@@ -24,31 +24,30 @@
 	}
 
  %>
- 
- <h4>
+ <ul class="page-navigator">
 	<%if(startBlock >1) {%> <!-- 11페이지 부터 이전 표시(1페이지에선 1이라 표시안됨) -->
 		<%if(isSearch) {%>
-			<a href="<%=request.getRequestURI() %>?type=<%=type%>&keyword=<%=keyword%>&pno=<%=startBlock - 1%>">[이전]</a>  
+			<li><a href="<%=request.getRequestURI() %>?type=<%=type%>&keyword=<%=keyword%>&pno=<%=startBlock - 1%>">[이전]</a></li>  
 		<%}else{ %>
-			<a href="<%=request.getRequestURI() %>?pno=<%=startBlock-1%>">[이전]</a>
+			<li><a href="<%=request.getRequestURI() %>?pno=<%=startBlock-1%>">[이전]</a></li>
 		<%} %>
 	<%} %>
 	<%for(int i=startBlock; i<=finishBlock; i++){ %>
 		<%if(pno==i){%>
-			<%=i%> 
+		<li class="active"><a href="#"><%=i%></a></li>
 		<%} else {%>
 			<%if(isSearch) {%>
-				<a href="<%=request.getRequestURI() %>?type=<%=type%>&keyword=<%=keyword%>&pno=<%=i%>"><%=i%></a>				
+				<li><a href="<%=request.getRequestURI() %>?type=<%=type%>&keyword=<%=keyword%>&pno=<%=i%>"><%=i%></a></li>				
 			<%}else{ %>
-				<a href="<%=request.getRequestURI() %>?pno=<%=i%>"><%=i %></a>
+				<li><a href="<%=request.getRequestURI() %>?pno=<%=i%>"><%=i %></a></li>
 			<%} %>
 		<%} %>
 	<%} %>				
 		<%if(pageCount > finishBlock) {%>
 		<%if(isSearch) {%>
-			<a href="<%=request.getRequestURI() %>?type=<%=type%>&keyword=<%=keyword%>&pno=<%=finishBlock + 1%>">[다음]</a>
+			<li><a href="<%=request.getRequestURI() %>?type=<%=type%>&keyword=<%=keyword%>&pno=<%=finishBlock + 1%>">[다음]</a></li>
 		<%}else{ %>
-			<a href="<%=request.getRequestURI() %>?pno=<%=finishBlock+1 %>">[다음]</a>
+			<li><a href="<%=request.getRequestURI() %>?pno=<%=finishBlock+1 %>">[다음]</a></li>
 		<%} %>
 	<%} %>
-</h4>
+</ul>

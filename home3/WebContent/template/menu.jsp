@@ -36,10 +36,10 @@ boolean admin = grade != null && grade.equals("관리자");
         <div class="menu">
           <label for="hamburg">&equiv;</label>
           <input type="checkbox" id="hamburg" />
-          <a href="<%= context %>" class="menu-item menu-left">홈으로</a>
-          <a href="<%=context%>/board/list.jsp" class="menu-item menu-left">게시판</a>
+          <a href="<%= context %>" class="menu-item left-menu">홈으로</a>
+          <a href="<%=context%>/board/list.jsp" class="menu-item left-menu">게시판</a>
           <% if(admin) {%> 
-      		  <a href="<%= context %>/admin/list.jsp" class="menu-item menu-left">회원찾기</a>
+      		  <a href="<%= context %>/admin/list.jsp" class="menu-item left-menu">회원찾기</a>
           <%} %>
           <% if(login) { %>
        	 	  <a href="<%= context %>/member/login.jsp" class="menu-item right-menu">로그인</a>

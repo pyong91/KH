@@ -65,7 +65,7 @@ th, td{
 <jsp:include page="/template/header.jsp"></jsp:include>
 <div class="body">
 <div class="con_table" align="center">
-	<table width="80%">
+	<table width="80%" class="table table-hover">
 		<tr>
 			<th>번호</th>
 			<th>그룹</th>
