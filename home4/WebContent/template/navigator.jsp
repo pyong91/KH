@@ -1,53 +1,68 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<!-- 네비게이터(navigator -->
-<!-- 
-	반드시 받아야 하는 데이터 : type, keyword, pno, count, navsize
- -->
- 
- <%
- 	String type = request.getParameter("type");
-	String keyword = request.getParameter("keyword");
-	boolean isSearch = type != null && keyword != null;
-	int pno = Integer.parseInt(request.getParameter("pno"));	// 현재 페이지 번호
-	int count = Integer.parseInt(request.getParameter("count"));	// 총 게시글 수
-	int navsize = Integer.parseInt(request.getParameter("navsize"));	// 보여줄 페이지 번호 수
-	int pagesize = Integer.parseInt(request.getParameter("pagesize")); // 보여줄 게시글 수 
-	int pageCount = (count + pagesize) / pagesize;	// 총 페이지 수
-	int startBlock = (pno - 1) / navsize * navsize + 1;	// 보여줄 페이지의 첫번째 번호 (21(startBlock)~30)
-	int finishBlock = startBlock + (navsize - 1);	// 보여줄 페이지의 마지막 번호(21~30(finishBlock))
-	//만약 마지막 블록이 페이지 수보다 크다면 수정 처리
-	// 페이지 마지막번호 > 총페이지  -> 마지막번호에 총페이지 대입
-	if(finishBlock > pageCount){
-		finishBlock = pageCount;
-	}
+<c:set var="type" value="${param.type}"></c:set>
+<c:set var="keyword" value="${param.keyword}"></c:set> 
+<c:set var="isSearch" value="${not empty type and not empty keyword}"></c:set> 
+<c:set var="pno" value="${param.pno}"></c:set> 
+<c:set var="count" value="${param.count}"></c:set> 
+<c:set var="navsize" value="${param.navsize}"></c:set> 
+<c:set var="pagesize" value="${param.pagesize}"></c:set> 
 
- %>
- <ul class="page-navigator">
-	<%if(startBlock >1) {%> <!-- 11페이지 부터 이전 표시(1페이지에선 1이라 표시안됨) -->
-		<%if(isSearch) {%>
-			<li><a href="<%=request.getRequestURI() %>?type=<%=type%>&keyword=<%=keyword%>&pno=<%=startBlock - 1%>">[이전]</a></li>  
-		<%}else{ %>
-			<li><a href="<%=request.getRequestURI() %>?pno=<%=startBlock-1%>">[이전]</a></li>
-		<%} %>
-	<%} %>
-	<%for(int i=startBlock; i<=finishBlock; i++){ %>
-		<%if(pno==i){%>
-		<li class="active"><a href="#"><%=i%></a></li>
-		<%} else {%>
-			<%if(isSearch) {%>
-				<li><a href="<%=request.getRequestURI() %>?type=<%=type%>&keyword=<%=keyword%>&pno=<%=i%>"><%=i%></a></li>				
-			<%}else{ %>
-				<li><a href="<%=request.getRequestURI() %>?pno=<%=i%>"><%=i %></a></li>
-			<%} %>
-		<%} %>
-	<%} %>				
-		<%if(pageCount > finishBlock) {%>
-		<%if(isSearch) {%>
-			<li><a href="<%=request.getRequestURI() %>?type=<%=type%>&keyword=<%=keyword%>&pno=<%=finishBlock + 1%>">[다음]</a></li>
-		<%}else{ %>
-			<li><a href="<%=request.getRequestURI() %>?pno=<%=finishBlock+1 %>">[다음]</a></li>
-		<%} %>
-	<%} %>
+<!-- EL은 parseInt가 없기 때문에 fmt의 formatNumber 태그를 통해 처리 -->
+<fmt:parseNumber var="startBlock" integerOnly="true" value="${(pno - 1) / navsize}"></fmt:parseNumber>
+<c:set var="startBlock" value="${startBlock * navsize + 1}"></c:set> 
+<c:set var="finishBlock" value="${startBlock + (navsize - 1)}"></c:set> 
+<fmt:parseNumber var="pageCount" value="${(count + pagesize) / pagesize}"></fmt:parseNumber>
+
+<c:if test="${finishBlock > pageCount}">
+	<c:set var="finishBlock" value="${pageCount}"></c:set>
+</c:if>
+
+<!-- 포워딩 구조에서는 주소 확인 명령이 달라짐 -->
+<c:set var="uri" value="${requestScope['javax.servlet.forward.request_uri']}"></c:set>
+
+<ul class="page-navigator">
+
+	<!-- 이전 버튼 -->
+	<c:if test="${startBlock > 1}">
+		<c:choose>
+			<c:when test="${isSearch}">
+				<li><a href="${uri}?type=${type}&keyword=${keyword}&pno=${startBlock-1}">이전</a></li>
+			</c:when>
+			<c:otherwise>
+				<li><a href="${uri}?pno=${startBlock-1}">이전</a></li>
+			</c:otherwise>
+		</c:choose>
+	</c:if>
+    <c:forEach var="i" begin="${startBlock}" end="${finishBlock}">
+    	<c:choose>
+    		<c:when test="${i == pno}">
+				<li class="active"><a href="#">${i}</a></li>
+			</c:when>
+			<c:otherwise>
+				<c:choose>
+					<c:when test="${isSearch}">
+						<li><a href="${uri}?type=${type}&keyword=${keyword}&pno=${i}">${i}</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="${uri}?pno=${i}">${i}</a></li>
+					</c:otherwise>
+				</c:choose>
+			</c:otherwise>
+		</c:choose>
+	</c:forEach>
+
+    <!-- 다음 버튼 -->
+    <c:if test="${finishBlock < pageCount}">
+    	<c:choose>
+			<c:when test="${isSearch}">
+				<li><a href="${uri}?type=${type}&keyword=${keyword}&pno=${finishBlock+1}">다음</a></li>
+			</c:when>
+			<c:otherwise>
+				<li><a href="${uri}?pno=${finishBlock+1}">다음</a></li>	
+			</c:otherwise>
+		</c:choose>
+	</c:if>
+
 </ul>

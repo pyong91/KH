@@ -29,7 +29,7 @@ public class BoardEditServlet extends HttpServlet{
 			dto.setWriter(id);
 			dto.setNo(no);
 			dao.edit(dto);
-			resp.sendRedirect("content.jsp?no="+dto.getNo());
+			resp.sendRedirect("content.do?no="+dto.getNo());
 		} catch (Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);

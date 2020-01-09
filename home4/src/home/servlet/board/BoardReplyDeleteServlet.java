@@ -23,7 +23,7 @@ public class BoardReplyDeleteServlet extends HttpServlet{
 			rdao.delete(reply_no);
 			bdao.replyCountMinus(origin);
 			
-			resp.sendRedirect("content.jsp?no="+origin);
+			resp.sendRedirect("content.do?no="+origin);
 		}
 		catch(Exception e){
 			e.printStackTrace();

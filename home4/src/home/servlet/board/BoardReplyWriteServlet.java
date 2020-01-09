@@ -32,7 +32,7 @@ public class BoardReplyWriteServlet extends HttpServlet {
 			dao.write(dto);
 			BoardDao bdao = new BoardDao();
 			bdao.replyCountPlus(origin);
-			resp.sendRedirect("content.jsp?no=" + origin);
+			resp.sendRedirect("content.do?no=" + origin);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
